@@ -1,4 +1,4 @@
 # Run :
 
-pip install requriment.tx
-python main.py
+  - pip install requriment.tx
+  - streamlit run main.py
