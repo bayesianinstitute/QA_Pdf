@@ -3,14 +3,18 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
+import gdown
+import os
+import zipfile
 
 def execute_script(script_path):
     subprocess.run(['streamlit', 'run', script_path])
 
+
 def login_page():
     st.title("User Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("Username",key="username")
+    password = st.text_input("Password", type="password",key="password")
     if st.button("Login"):
         # Verify user credentials
         if username == "admin" and password == "admin_password":
@@ -39,12 +43,23 @@ def main():
     name, authentication_status, username = authenticator.login('Login', 'main')
     
     if authentication_status:
-        if username == "admin":
-            execute_script('app.py')
 
+        if username == "admin":
+
+            execute_script('Pdf-QA-Admin.py')
                     
         if username == "user":
-            execute_script('app.py')
+
+            execute_script('Pdf-QA-User.py')
+                    
+    elif authentication_status == False:
+        st.error("Username/password is incorrect")
+
+    elif authentication_status == None:
+        st.warning("Please enter your username and password")
+        
+    else:
+        st.error("Authentication failed. Please try again.")
             
 
 if __name__ == '__main__':
