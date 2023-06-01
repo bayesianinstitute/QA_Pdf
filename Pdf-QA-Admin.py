@@ -128,7 +128,8 @@ def main():
             )
 
         if uploaded_files:
-                # Create a folder to save the uploaded files
+                
+            # Create a folder to save the uploaded files
             folder_name = "useruploaded"
             os.makedirs(folder_name, exist_ok=True)
 
